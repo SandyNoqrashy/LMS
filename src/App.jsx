@@ -10,7 +10,7 @@ import Support from "./pages/HelpSupport/Support/Support";
 import GraduationProject from "./pages/Learning/GraduationProject/GraduationProject"; 
 import LiveSessions from "./pages/Learning/LiveSessions/LiveSessions";
 import Tasksmaterials from "./pages/Learning/TasksMaterials/TaskMaterials";
-import Nav from "./Components/Nav/Nav";
+import Nav from "./Components/nav/Nav";
 const App = () => {
   return (
     <div>
