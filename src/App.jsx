@@ -10,11 +10,13 @@ import Support from "./pages/HelpSupport/Support/Support";
 import GraduationProject from "./pages/Learning/GraduationProject/GraduationProject"; 
 import LiveSessions from "./pages/Learning/LiveSessions/LiveSessions";
 import Tasksmaterials from "./pages/Learning/TasksMaterials/TaskMaterials";
-import Nav from "./Components/nav/Nav";
+import Sidebar from "./Components/sidebar/Sidebar";
 const App = () => {
   return (
-    <div>
-      <Nav />
+  <div className="flex w-full min-h-screen bg-[#FAFBFF] overflow-x-hidden">
+      
+      {/* السايد بار هيظهر في كل الصفحات ما عدا صفحة الـ Login */}
+      <Sidebar />
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
@@ -25,7 +27,7 @@ const App = () => {
         <Route path="/Support" element={<Support />} />
         <Route path="/GraduationProject" element={<GraduationProject />} />
         <Route path="/LiveSessions" element={<LiveSessions/>} />
-        <Route path="/TasksMaterials" element={<tasksmaterials />} />
+        <Route path="/Assignment" element={<Tasksmaterials />} />
         
       </Routes>
     </div>

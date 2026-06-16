@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --primary: #193FB3;
+  --primary-shade: #F5F7FF;
+  --secondary: #7944E4;
+  --secondary-shade: #F8F5FF;
+  --green: #2EC4B6;
+  --red: #C54216;
+  --yellow: #F0B51A;
+  --purple-light: #B08DF7;
+  --dark-gray: #666666;
+  --light-gray: #FAFAFA;
+  --gray-base: #EEEEEE;
+  --main-gradient: linear-gradient(155deg, #193FB3 0%, #0E266D 100%);
+}
