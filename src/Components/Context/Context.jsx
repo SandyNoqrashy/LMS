@@ -13,6 +13,11 @@ export const AuthProvider = ({ children }) => {
       setUser(userData);
       setLogged(true);
       localStorage.setItem('tc', token); 
+       
+    // setUser(userData);
+    // setLogged(true);
+    // localStorage.setItem("tc", JSON.stringify(userData));
+  
     } catch (e) {
       console.error("توكن غير صالح:", e);
       logout();

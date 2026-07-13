@@ -1,48 +1,49 @@
 import { useState, useEffect } from 'react';
 import Sidebar from '../../../Components/Sidebar/Sidebar';
-import { MdChevronLeft, MdChevronRight } from "react-icons/md"; // استيراد الأيقونات
+import { MdChevronLeft, MdChevronRight } from "react-icons/md"; 
 import { CiCalendar } from "react-icons/ci";
 import { PiClockCountdownLight } from "react-icons/pi";
 import { MdOutlineHexagon, MdHexagon } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import Header from '../../../Components/Header/Header';
 import { useOutletContext } from 'react-router-dom';
+import Error from '../../../Components/Error/Error'
+
 const LiveSessions = () => {
   const [activeTab, setActiveTab] = useState('online');
   const [sessions, setSessions] = useState([]);
   const [loading, setLoading] = useState(true);
-  
-  const [searchQuery] = useOutletContext(); // سحب قيمة البحث من الـ Layout
+  const [error, setError] = useState(false); 
+  const [searchQuery] = useOutletContext(); 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 9; // عدد الكروت في الصفحة الواحدة
+  const itemsPerPage = 9; 
+
+  const fetchSessions = async () => {
+    setLoading(true);
+    setError(false);
+    try {
+      const url = import.meta.env.VITE_API_URL;
+      const req = await fetch(`${url}/api/LiveSessions2`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+      const data = await req.json();
+      setSessions(data.live_sessions || data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching sessions:", error);
+      setError(true);
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchSessions = async () => {
-      try {
-        const req = await fetch(`http://localhost:3000/live_sessions`, {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        });
-        const data = await req.json();
-        setSessions(data.live_sessions || data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching sessions:", error);
-        setLoading(false);
-      }
-    };
-
     fetchSessions();
   }, []);
 
-  // // الفلترة
-  // const filteredSessions = sessions.filter((session) => {
-  //   return session.delivery_mode === activeTab;
-  // });
 const filteredSessions = sessions.filter((session) => {
   const matchesTab = session.delivery_mode === activeTab;
   const matchesSearch = session.subject_name.toLowerCase().includes(searchQuery.toLowerCase());
-  
   return matchesTab && matchesSearch;
 });
   // حساب الـ Pagination
@@ -56,9 +57,6 @@ const filteredSessions = sessions.filter((session) => {
   useEffect(() => {
     setCurrentPage(1);
   }, [activeTab,searchQuery]);
-
-
-
 
   if (loading) return <div className="text-center mt-20 font-bold text-[#3E63DD]">Loading Sessions...</div>;
 
@@ -82,8 +80,12 @@ const filteredSessions = sessions.filter((session) => {
           </div>
 
           {/* Sessions Grid */}
-          <div className="grid grid-cols-3 gap-5 mb-10 mt-8">
-            {currentSessions.length > 0 ? (
+          <div className="w-full grid grid-cols-3 gap-5 mb-10 mt-8">
+            {error ? (
+              <div className="col-span-3 flex justify-center">
+              <Error onRetry={fetchSessions} />
+              </div>
+            ) : currentSessions.length > 0 ? (
               currentSessions.map((session) => (
                 <SessionCard key={session.id} data={session} />
               ))
@@ -95,7 +97,7 @@ const filteredSessions = sessions.filter((session) => {
           </div>
 
           {/* Pagination Controls - مطابق للتصميم */}
-          {totalPages > 1 && (
+          {totalPages > 1 && !error && (
             <div className="flex justify-center items-center gap-2 mb-10 mt-6" dir="ltr">
               <button
                 disabled={currentPage === 1}
@@ -139,8 +141,6 @@ const filteredSessions = sessions.filter((session) => {
     </div>
   );
 };
-
-
 // Sub-Component: Session Card
 const SessionCard = ({ data }) => {
   const isToday = data.status === "today";
@@ -181,7 +181,7 @@ const SessionCard = ({ data }) => {
       {(isCompleted || isToday) && (
         <Link to={`/SessionDetails/${data.id}`} className="w-full">
           <button className={`w-full h-10 rounded-lg text-sm font-semibold flex items-center justify-center gap-2 text-white transition-opacity hover:opacity-90 ${
-            isToday ? 'bg-[#A180E9]' : 'bg-[#3E63DD]'
+            isToday ? 'bg-[#B08DF7]' : 'bg-[#5C80ED]'
           }`}>
             {data.resources?.button_text || "View Record"} <span>›</span>
           </button>

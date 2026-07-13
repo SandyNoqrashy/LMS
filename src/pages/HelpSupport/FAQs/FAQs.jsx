@@ -20,8 +20,8 @@ const FAQs = () => {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen p-8">
-      <div className="w-[1039px] mx-auto bg-white p-6 rounded-xl border border-gray-100">
+    <div className="bg-gray-50 min-h-screen p-4 md:p-8">
+      <div className="w-full max-w-[1039px] mx-auto bg-white p-6 rounded-xl border border-gray-100">
         
         {/* العنوان */}
         <div className="mb-6">
@@ -54,8 +54,7 @@ const FAQs = () => {
                 
                 {/* تبديل الأيقونات بناءً على الحالة */}
                 {openIds.includes(item.id) ? (
-                  /* الأيقونة الموف عند الفتح */
-                  <svg width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg" className="shrink-0">
                     <g filter="url(#filter0_dii_806_2770)">
                       <rect width="34.4175" height="34.4175" rx="17.2088" transform="matrix(1 0 0 -1 6 38.418)" fill="url(#paint0_linear_806_2770)" shapeRendering="crispEdges"/>
                       <path d="M17.2539 23.2793L23.209 17.3242L29.1641 23.2793" stroke="white" strokeWidth="1.70146" strokeLinecap="round" strokeLinejoin="round"/>
@@ -75,8 +74,7 @@ const FAQs = () => {
                     </defs>
                   </svg>
                 ) : (
-                  /* السهم الرمادي عند الإغلاق */
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400 shrink-0">
                     <path d="M6 9l6 6 6-6" />
                   </svg>
                 )}
