@@ -82,10 +82,21 @@ const navSections = [
   {
     label: "Engagement",
     items: [
-  
+      { 
+        name: "Community", 
+        path: "/community", 
+        icon: (active) => (
+          <svg className={`h-[20px] w-[20px] transition-colors duration-150 ${active ? "text-white" : "text-white/60"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+        )
+      },
       { 
         name: "AI Assistant", 
-        path: "/AIassistant", 
+        path: "/ai-assistant", 
         icon: (active) => (
           <svg className={`h-[20px] w-[20px] transition-colors duration-150 ${active ? "text-white" : "text-white/60"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 2a10 10 0 0 1 7.54 16.59c-.44.5-.47 1.25-.08 1.78l1.3 1.73a.5.5 0 0 1-.4.8H3.64a.5.5 0 0 1-.4-.8l1.3-1.73c.39-.53.36-1.28-.08-1.78A10 10 0 0 1 12 2z" />
