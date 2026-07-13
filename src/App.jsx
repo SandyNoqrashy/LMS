@@ -10,6 +10,10 @@ import Support from "./pages/HelpSupport/Support/Support";
 import GraduationProject from "./pages/Learning/GraduationProject/GraduationProject"; 
 import LiveSessions from "./pages/Learning/LiveSessions/LiveSessions";
 import Tasksmaterials from "./pages/Learning/TasksMaterials/TaskMaterials";
+import Security from "./pages/Settings/Security/Security";
+import LanguageSettings from "./pages/Settings/Language/Language";
+import NotificationsSettings from "./pages/Settings/Notifications/Notifications";
+import AccountDetails from "./pages/Settings/AccountDetails/AccountDetails";
 import Sidebar from "./Components/sidebar/Sidebar";
 const App = () => {
   return (
@@ -28,7 +32,11 @@ const App = () => {
         <Route path="/GraduationProject" element={<GraduationProject />} />
         <Route path="/LiveSessions" element={<LiveSessions/>} />
         <Route path="/Assignment" element={<Tasksmaterials />} />
-        
+        <Route path="/security" element={<Security />} />
+        <Route path="/language" element={<LanguageSettings />} />
+        <Route path="/notifications" element={<NotificationsSettings />} />
+        <Route path="/account-details" element={<AccountDetails />} />
+
       </Routes>
     </div>
   );
