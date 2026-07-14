@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import Dashboard from "./pages/Core/Dashboard/Dashboard";
 import Timeline from "./pages/Core/Timeline/Timeline";
@@ -8,6 +9,7 @@ import Support from "./pages/HelpSupport/Support/Support";
 import GraduationProject from "./pages/Learning/GraduationProject/GraduationProject";
 import LiveSessions from "./pages/Learning/LiveSessions/LiveSessions";
 import Security from "./pages/Settings/Security/Security";
+import Sidebar from "./Components/Sidebar/Sidebar";
 import LanguageSettings from "./pages/Settings/Language/Language";
 import NotificationsSettings from "./pages/Settings/Notifications/Notifications";
 import AccountDetails from "./pages/Settings/AccountDetails/AccountDetails";
@@ -19,12 +21,13 @@ import MainLayout from "./Components/mainLayout/MainLayout";
 import NotFound from "./pages/NotFound/NotFound";
 
 const App = () => {
-  
+    const location = useLocation();
   return (
     <AuthProvider>
   <div className="flex w-full min-h-screen bg-[#FAFBFF] overflow-x-hidden">
       
-    
+      {/* السايد بار هيظهر في كل الصفحات ما عدا صفحة الـ Login */}
+        {location.pathname !== "/" && <Sidebar />}
    <Routes>
   <Route path="/" element={<Login />} />
 
