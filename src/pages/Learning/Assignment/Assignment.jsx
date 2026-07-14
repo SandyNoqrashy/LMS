@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import DetailsTask from '././Detailstask/Detailstask'; 
+import DetailsTask from './Detailstask/Detailstask'; 
 
-export default function TaskMaterials() {
+export default function Assignment() {
   const [activeTab, setActiveTab] = useState('online');
   const [assignments, setAssignments] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
