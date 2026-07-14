@@ -46,10 +46,11 @@ const Login = () => {
         }),
       });
       const data = await response.json();
-      
+      console.log("البيانات المستلمة من السيرفر:", data);
       if (data && data.token) {
         login(data.token);
         navigate("/LiveSessions");
+        console.error("لم يتم العثور على توكن في رد السيرفر");
       } else {
         setErrors({ email: true, password: true });
       }

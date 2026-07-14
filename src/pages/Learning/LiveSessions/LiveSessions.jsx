@@ -23,7 +23,7 @@ const LiveSessions = () => {
     setError(false);
     try {
       const url = import.meta.env.VITE_API_URL;
-      const req = await fetch(`${url}/api/LiveSessions2`, {
+      const req = await fetch(`${url}/api/LiveSessions`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
@@ -43,7 +43,7 @@ const LiveSessions = () => {
 
 const filteredSessions = sessions.filter((session) => {
   const matchesTab = session.delivery_mode === activeTab;
-  const matchesSearch = session.subject_name.toLowerCase().includes(searchQuery.toLowerCase());
+  const matchesSearch = session.title.toLowerCase().includes(searchQuery.toLowerCase());
   return matchesTab && matchesSearch;
 });
   // حساب الـ Pagination
@@ -149,27 +149,27 @@ const SessionCard = ({ data }) => {
   return (
     <div className="w-[330px] h-[357px] bg-white border-[0.5px] border-black/5 rounded-xl p-5 flex flex-col justify-between shadow-sm">
       <div>
-        <span className={`text-[12px] font-semibold px-2 py-1 rounded ${
-          isCompleted ? 'bg-[var(--primary-shade)] text-black' :
-          isToday ? 'bg-[var(--primary-shade)] text-black' : 'bg-[var(--primary-shade)] text-black'
-        }`}>
-          {data.status === "completed" ? "Completed" : data.status === "today" ? "Today Session" : "Pending"}
-        </span>
+  <span className={`text-[12px] font-semibold px-2 py-1 rounded bg-[var(--primary-shade)] text-black`}>
+    {data.status === "Completed" ? "Completed" : data.status === "Upcoming" ? "Upcoming Session" : data.status}
+  </span>
 
-        <div className="mt-3">
-          <p className="text-[14px] text-gray-700">Week {data.week} - Session {data.session_number} - {data.type}</p>
-          <h3 className="text-[16px] font-bold text-[#3E63DD] mt-1">{data.subject_name}</h3>
-        </div>
-        <div className="flex gap-4 mt-4 text-[12px] text-gray-500">
-          <span className="flex items-center gap-1.5">
-            <CiCalendar className="text-lg" />
-            {data.date}
-          </span>
-          <span className="flex items-center gap-1.5">
-            <PiClockCountdownLight className="text-lg" />
-            {data.time}
-          </span>
-        </div>
+  <div className="mt-3">
+    <p className="text-[14px] text-gray-700">
+      Week {data.weekNumber} - {data.type}
+    </p>
+    <h3 className="text-[16px] font-bold text-[#3E63DD] mt-1">{data.title}</h3>
+  </div>
+
+  <div className="flex gap-4 mt-4 text-[12px] text-gray-500">
+    <span className="flex items-center gap-1.5">
+      <CiCalendar className="text-lg" />
+      {new Date(data.scheduledAt).toLocaleDateString()}
+    </span>
+    <span className="flex items-center gap-1.5">
+      <PiClockCountdownLight className="text-lg" />
+      {new Date(data.scheduledAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+    </span>
+  </div>
 
         <div className="mt-5 space-y-2">
           <CheckItem label="Attendance" isDone={data.checklist?.attendance} />
